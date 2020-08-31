@@ -1,0 +1,10 @@
+{
+  "name": "Papitas y algo mas",
+  "adress": "cra 108 #22",
+  "phone": "+573042119997",
+  "chefs": {
+    "name": "pedro jose",
+    "phone": "+573042119997",
+    "notify": true
+  }
+}

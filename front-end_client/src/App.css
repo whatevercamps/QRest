@@ -1,0 +1,130 @@
+.Header {
+  height: 20vh;
+  background-color: aqua;
+}
+
+.Sections {
+  height: 80vh;
+  overflow-y: scroll;
+  padding: 5%;
+}
+
+.Products {
+  overflow-x: auto;
+  overflow-y: visible;
+  white-space: nowrap;
+}
+.Products > .Product {
+  display: inline-block;
+  float: none;
+  height: 200px;
+  width: 150px;
+  margin-right: 20px;
+}
+
+.Products > .Product .info {
+  margin-left: 5px;
+  max-width: 200px;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+}
+
+.Products > .Product .title {
+  display: block; /* or inline-block */
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 3.6em;
+  line-height: 1.8em;
+
+  margin-bottom: 0;
+}
+
+.Product img {
+  border-radius: 15%;
+  height: 150px;
+  width: 150px;
+}
+
+.Product .add-button {
+  width: 80px;
+}
+
+.AddProductHandler {
+  width: 100vw;
+  height: 100vh;
+  position: absolute !important;
+  z-index: 100;
+  top: 0;
+  left: 0;
+}
+
+.AddProductHandler .AddProductHandlerCard {
+  height: 100vh;
+  overflow: hidden;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+
+.QuantityHandler .container {
+  width: 45%;
+  margin: 0 auto;
+}
+.QuantityHandler .container h1 {
+  font-weight: bold;
+}
+
+.QuantityHandler .quantity-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: fit-content;
+  background: #eaeaea;
+  border-radius: 10px;
+  padding: 1rem 0.4rem;
+}
+
+.QuantityHandler .quantity-btn {
+  background: transparent;
+  border: none;
+  outline: none;
+  margin: 0;
+  padding: 0px 8px;
+  cursor: pointer;
+}
+.QuantityHandler .quantity-btn svg {
+  width: 15px;
+  height: 15px;
+}
+.QuantityHandler .quantity-input {
+  outline: none;
+  user-select: none;
+  text-align: center;
+  width: 47px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+}
+.QuantityHandler .quantity-input::-webkit-inner-spin-button,
+.QuantityHandler .quantity-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.AddProductHandler .makeConfirm {
+  display: flex;
+}
+
+.AddProductHandler .confirm-button {
+  background-color: tomato;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  height: 58px;
+  width: 200px;
+  margin: 0 0 0 auto;
+  border-radius: 12px;
+}
