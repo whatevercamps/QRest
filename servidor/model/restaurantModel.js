@@ -57,6 +57,30 @@ const MongoUtils = () => {
       });
   };
 
+  mu.getRestaurantWithTableId = (
+    client,
+    restaurantId,
+    tableId,
+    shouldCloseClient
+  ) => {
+    return handler(client)
+      .find({
+        _id: new ObjectID(restaurantId),
+        "tables.id": new ObjectID(tableId),
+      })
+      .toArray()
+      .catch(function (e) {
+        console.log("catch in model", e);
+        throw e; //
+      })
+      .finally(() => {
+        console.log("*****finalizing");
+        if (shouldCloseClient) {
+          client.close();
+        }
+      });
+  };
+
   mu.createTables = (client, restaurantId, numberOf, currentIndex) => {
     const tablesForPush = [];
 

@@ -7,13 +7,6 @@
 var app = require("../app");
 var debug = require("debug")("servidor:server");
 var http = require("http");
-const restaurantModel = require("../model/restaurantModel")();
-
-/*
- *  TelegramBot
- */
-const TelegramBot = require("../utils/telegramBot");
-TelegramBot(restaurantModel);
 
 /**
  * Get port from environment and store in Express.

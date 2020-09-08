@@ -9,7 +9,7 @@ dotenv.config();
 const cors = require("cors");
 
 var adminRouter = require("./routes/admin");
-var clientRouter = require("./routes/client");
+var { clientRouter, initClientRouter } = require("./routes/client");
 var app = express();
 
 app.use(logger("dev"));
@@ -24,6 +24,14 @@ app.use(
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   })
 );
+
+/*
+ *  TelegramBot stuff
+ */
+const restaurantModel = require("./model/restaurantModel")();
+const telegramBot = require("./utils/telegramBot")(restaurantModel);
+
+initClientRouter(telegramBot);
 
 app.use(express.static(path.join(__dirname, "public")));
 

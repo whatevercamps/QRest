@@ -3,6 +3,12 @@ var router = express.Router();
 const restaurantModel = require("../model/restaurantModel")();
 const orderModel = require("../model/orderModel")();
 
+var telegramBot = null;
+
+const initClientRouter = (t) => {
+  telegramBot = t;
+};
+
 router.get("/getMenuStructure", (req, res, next) => {
   const token = req.query.token;
 
@@ -50,23 +56,56 @@ router.post("/makeOrder", (req, res, next) => {
 
       if (resp && resp.insertedCount >= 1) {
         /* Make order notification for restaurant */
-        restaurantModel
-          .connect()
-          .then((client) => restaurantModel.getChatIds(client, restaurantId))
-          .then((chatsIdsResp) => {
-            console.log("chatIds", chatsIdsResp);
-            if (chatsIdsResp) {
-              res.status(200).json({
-                success: true,
-                msg: "Order created ",
-                data: resp,
-              });
-            } else throw new Error("failed to notificate restaurant", resp);
-          });
+        if (telegramBot) {
+          console.log("***efectivamente");
+          restaurantModel
+            .connect()
+            .then((client) =>
+              restaurantModel.getRestaurantWithTableId(
+                client,
+                restaurantId,
+                tableId,
+                true
+              )
+            )
+            .then((restaurants) => {
+              if (restaurants && restaurants.length && restaurants[0].chefs) {
+                const restaurant = restaurants[0];
+                const table = restaurant.tables.find(
+                  (table) => table.id.toString() === tableId
+                );
+                console.log("table", table);
+                if (table) {
+                  restaurant.chefs.forEach((chef) => {
+                    console.log("chef", chef);
+                    if (chef.notify && chef.chatId) {
+                      const msg = `Tiene una nueva orden en la mesa ${
+                        table.number
+                      }: ${order.map(
+                        (or) =>
+                          `\n ${or.quantity} ${or.product.name}, detalles: ${
+                            or.details || ""
+                          }`
+                      )}`;
+
+                      telegramBot.sendMessage(chef.chatId, msg).then((msg) => {
+                        console.log("msg", msg);
+                      });
+                    }
+                  });
+                  res.status(200).json({
+                    success: true,
+                    msg: "Order created ",
+                    data: resp,
+                  });
+                }
+              } else throw new Error("failed to notificate restaurant", resp);
+            });
+        }
         /* End */
       } else throw new Error("failed to authenticate user", resp);
     })
     .catch(next);
 });
 
-module.exports = router;
+module.exports = { clientRouter: router, initClientRouter };

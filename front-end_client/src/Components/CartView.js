@@ -9,7 +9,7 @@ export default function CartView(props) {
     };
 
     if (props.order && props.order.length) {
-      fetch("http://localhost:3001/client/createOrder", {
+      fetch("http://localhost:3001/client/makeOrder", {
         method: "POST",
         headers: {
           Accept: "application/json",
