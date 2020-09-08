@@ -4,10 +4,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 /* Components */
-import Header from "./Components/Header";
-import Footer from "./Components/Footer";
+import RestaurantHeader from "./Components/RestaurantHeader";
+import NavHeader from "./Components/NavHeader";
 import Sections from "./Components/Sections";
 import AddProductHandler from "./Components/AddProductHandler";
+import CartView from "./Components/CartView";
 /* End components */
 
 var getParams = function (url) {
@@ -27,14 +28,21 @@ function App(props) {
   /* state */
   const [token, setToken] = useState(null);
   const [menu, setMenu] = useState(null);
-  const [productToAdd, setProductToAdd] = useState({
-    name: "papitas",
-    ingredients: ["papas, pimienta, ajo"],
-    description: "Papas al horno muy ricas",
-    price: 4600,
-    imgUrl: "",
-  });
-  const [order, setOrder] = useState([]);
+  const [productToAdd, setProductToAdd] = useState(null);
+  const [order, setOrder] = useState([
+    {
+      details: "Hola, sin queso, por favor",
+      quantity: 2,
+      product: {
+        name: "papitas",
+        ingredients: ["papas, pimienta, ajo"],
+        description: "Papas al horno muy ricas",
+        price: 4600,
+        imgUrl: "",
+      },
+    },
+  ]);
+  const [viewCart, setViewCart] = useState(false);
   /* end state */
 
   /* Inner functions */
@@ -53,6 +61,7 @@ function App(props) {
   useEffect(() => {
     const params = getParams(window.location.href);
     if (params && params.token) {
+      setToken(params.token);
       fetch(
         `http://localhost:3001/client/getMenuStructure?token=${params.token}`,
         {
@@ -77,11 +86,27 @@ function App(props) {
     }
   }, []);
 
+  /* Viewcart handler */
+  const viewCartHandler = () => {
+    if (order.length > 0 && viewCart === false) {
+      setViewCart(true);
+    } else if (viewCart === true) {
+      setViewCart(false);
+    }
+  };
+  /* End of viewcart handler */
+
   return (
     <div className='App'>
       {menu ? (
         <div>
-          <Header />
+          <NavHeader
+            setProductToAdd={setProductToAdd}
+            productToAdd={productToAdd}
+            orderQuantity={order.length}
+            viewCartHandler={viewCartHandler}
+          />
+          <RestaurantHeader />
           {productToAdd && (
             <AddProductHandler
               product={productToAdd}
@@ -91,8 +116,10 @@ function App(props) {
           <Sections
             sections={menu.pages[0]["sections"]}
             setProductToAdd={(p) => setProductToAdd(p)}
-          />
-          <Footer />
+          />{" "}
+          {viewCart && order.length > 0 && (
+            <CartView order={order} token={token} />
+          )}
         </div>
       ) : (
         <h1>No he podido cargar el menu</h1>

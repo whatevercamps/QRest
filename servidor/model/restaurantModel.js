@@ -128,6 +128,30 @@ const MongoUtils = () => {
       });
   };
 
+  mu.registerChatId = (client, phoneNumber, chatId) => {
+    const query = { "chefs.phone": phoneNumber };
+
+    return handler(client)
+      .findOneAndUpdate(
+        query,
+        {
+          $set: {
+            "chefs.$.chatId": chatId,
+          },
+        },
+        {
+          returnOriginal: false,
+        }
+      )
+      .catch(function (e) {
+        console.log("catch in model", e);
+        throw e; //
+      })
+      .finally(() => {
+        client.close();
+      });
+  };
+
   return mu;
 };
 

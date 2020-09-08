@@ -1,6 +1,7 @@
-.Header {
+.RestaurantHeader {
   height: 20vh;
   background-color: aqua;
+  margin-top: 40px;
 }
 
 .Sections {
@@ -58,6 +59,7 @@
   z-index: 100;
   top: 0;
   left: 0;
+  padding-top: 30px;
 }
 
 .AddProductHandler .AddProductHandlerCard {
@@ -128,3 +130,85 @@
   margin: 0 0 0 auto;
   border-radius: 12px;
 }
+
+.NavHeader {
+  z-index: 100;
+}
+
+.NavHeader .cartBar {
+  background-color: rgba(255, 255, 255, 0.7);
+  height: 6vh;
+}
+
+.NavHeader .nav-icon {
+  margin: 0;
+  width: 30px;
+  cursor: pointer;
+}
+
+.NavHeader .nav-icon:after,
+.NavHeader .nav-icon:before,
+.NavHeader .nav-icon div {
+  background-color: black;
+  border-radius: 3px;
+  content: "";
+  display: block;
+  height: 2px;
+  margin: 7px 0;
+  transition: all 0.2s ease-in-out;
+}
+
+/*Note: If you changed width of lines of head of arrow, then you also might have to set the transformation of those line accordingly*/
+.NavHeader .nav-icon.closed:before {
+  transform: translateY(3px) translateX(-2px) rotate(135deg);
+  width: 17px;
+}
+
+.NavHeader .nav-icon.closed:after {
+  transform: translateY(-3px) translateX(-2px) rotate(-135deg);
+  width: 17px;
+}
+
+.NavHeader .backArrow-button,
+.NavHeader .cartButton {
+  background-color: rgba(0, 0, 0, 0);
+  border: 0;
+  padding: 0;
+  color: black;
+}
+
+.noview-button {
+  background-color: rgba(0, 0, 0, 0);
+  border: 0;
+  padding: 0;
+  color: black;
+}
+
+.CartView {
+  height: 94vh;
+  width: 100vw;
+  background-color: #f8f9fa;
+  position: fixed;
+  top: 6vh;
+}
+
+.ProductResume .photo {
+  border-radius: 15%;
+  width: 100%;
+}
+
+.OrderFooter {
+  width: 100vw;
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  background-color: #f4f4f6;
+}
+
+.ConfirmOrderButton {
+  margin: 10px;
+}
+
+/* * {
+  border: 0.5px solid red !important;
+} */

@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const restaurantModel = require("../model/restaurantModel")();
+const orderModel = require("../model/orderModel")();
 
 router.get("/getMenuStructure", (req, res, next) => {
   const token = req.query.token;
@@ -32,8 +33,40 @@ router.get("/getMenuStructure", (req, res, next) => {
     .catch(next);
 });
 
-// router.post("makeOrder", (req, res) => {
-//   products = req.body.products;
-// });
+router.post("/makeOrder", (req, res, next) => {
+  const order = req.body.order;
+  const token = req.body.token;
+
+  const restaurantId = token.split("@@")[0];
+  const tableId = token.split("@@")[1];
+
+  orderModel
+    .connect()
+    .then((client) =>
+      orderModel.createOrder(client, order, tableId, restaurantId)
+    )
+    .then((resp) => {
+      console.log("resp", resp);
+
+      if (resp && resp.insertedCount >= 1) {
+        /* Make order notification for restaurant */
+        restaurantModel
+          .connect()
+          .then((client) => restaurantModel.getChatIds(client, restaurantId))
+          .then((chatsIdsResp) => {
+            console.log("chatIds", chatsIdsResp);
+            if (chatsIdsResp) {
+              res.status(200).json({
+                success: true,
+                msg: "Order created ",
+                data: resp,
+              });
+            } else throw new Error("failed to notificate restaurant", resp);
+          });
+        /* End */
+      } else throw new Error("failed to authenticate user", resp);
+    })
+    .catch(next);
+});
 
 module.exports = router;
