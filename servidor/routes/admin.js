@@ -125,4 +125,20 @@ router.post("/createTables", (req, res) => {
   );
 });
 
+router.get("/getRestaurants", (req, res, next) => {
+  const adminId = req.query.adminId;
+
+  restaurantModel
+    .connect()
+    .then((client) => restaurantModel.getRestaurantsByAdminId(client, adminId))
+    .then((restaurants) => {
+      res.status(200).json({
+        success: true,
+        msg: "Restaurants response",
+        data: restaurants,
+      });
+    })
+    .catch(next);
+});
+
 module.exports = router;

@@ -81,6 +81,22 @@ const MongoUtils = () => {
       });
   };
 
+  mu.getRestaurantsByAdminId = (client, adminId) => {
+    return handler(client)
+      .find({
+        adminId: new ObjectID(adminId),
+      })
+      .toArray()
+      .catch(function (e) {
+        console.log("catch in model", e);
+        throw e; //
+      })
+      .finally(() => {
+        console.log("*****finalizing");
+        client.close();
+      });
+  };
+
   mu.createTables = (client, restaurantId, numberOf, currentIndex) => {
     const tablesForPush = [];
 

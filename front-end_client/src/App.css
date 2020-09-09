@@ -208,6 +208,19 @@
 .ConfirmOrderButton {
   margin: 10px;
 }
+.AdminOverview .Breadcrumb {
+  margin-top: 30px;
+}
+
+.RestaurantCard,
+.MenuCard {
+  margin: 10px;
+}
+
+.RestaurantCard .editButtonFooter,
+.MenuCard .editButtonFooter {
+  margin-right: 5px;
+}
 
 /* * {
   border: 0.5px solid red !important;
