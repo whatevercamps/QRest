@@ -8,10 +8,10 @@ import RestaurantCard from "./RestaurantCard";
 export default function AdminRestaurantsOverview(props) {
   return (
     <Row>
-      {props.restaurants.map((restaurant) => {
+      {props.restaurants.map((restaurant, index) => {
         return (
-          <Col md={4}>
-            <RestaurantCard restaurant={restaurant} />
+          <Col lg={3} md={12} key={index}>
+            <RestaurantCard restaurant={restaurant} key={index} />
           </Col>
         );
       })}

@@ -19,11 +19,9 @@ export default function AdminOverview(props) {
           </Col>
         </Row>
         <AdminMenusOverview
-          menus={props.restaurants.map((restaurant) => {
-            let menu = { ...restaurant.menu };
-            menu["RestaurantName"] = restaurant.name;
-            return menu;
-          })}
+          setMenuToEditId={props.setMenuToEditId}
+          setMenuToEdit={props.setMenuToEdit}
+          restaurants={props.restaurants}
         />
         <Row>
           <Col>

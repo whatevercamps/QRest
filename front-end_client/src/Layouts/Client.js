@@ -60,7 +60,7 @@ function Client(props) {
     if (params && params.token) {
       setToken(params.token);
       fetch(
-        `http://192.168.0.7:3001/client/getMenuStructure?token=${params.token}`,
+        `http://localhost:3001/client/getMenuStructure?token=${params.token}`,
         {
           method: "GET",
           headers: {
@@ -111,7 +111,7 @@ function Client(props) {
             />
           )}
           <Sections
-            sections={menu.pages[0]["sections"]}
+            sections={menu}
             setProductToAdd={(p) => setProductToAdd(p)}
           />{" "}
           {viewCart && order.length > 0 && (

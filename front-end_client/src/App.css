@@ -208,7 +208,7 @@
 .ConfirmOrderButton {
   margin: 10px;
 }
-.AdminOverview .Breadcrumb {
+.Breadcrumb {
   margin-top: 30px;
 }
 
@@ -222,6 +222,69 @@
   margin-right: 5px;
 }
 
+.EditMenuCard {
+  margin: 0 10px;
+}
+
+.editMenuInput {
+  text-align: center;
+}
+
+.editMenuSection {
+  padding: 30px 10%;
+}
+.editMenuSection .row {
+  margin: 30px 0;
+}
+.EditMenuView .footer {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.EditProduct .photo {
+  background-image: url("http://placehold.it/600x300/09f/fff.png");
+  width: 100%;
+  height: 150px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.5;
+  transition: all ease-out 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.EditProduct .photo .editIcon {
+  opacity: 0.5;
+  transition: all ease-out 0.5s;
+}
+
+.EditProduct .photo:hover .editIcon {
+  opacity: 1;
+}
+
+.EditProduct .photo:hover {
+  opacity: 0.3;
+}
+.EditProduct .editProductInfoForm {
+  margin-bottom: 15px;
+}
+.EditProduct .editProductInfoFormControl {
+  padding: 3px;
+}
+.EditProduct .editProductInfoFormControl.short {
+  max-height: 27px;
+}
+
+.saveChangesButton {
+  transition: all ease-out 0.5s;
+}
+
+.saveChangesButton.fixedButton {
+  position: fixed;
+  z-index: 1000;
+}
+
 /* * {
   border: 0.5px solid red !important;
-} */
+} */ ;

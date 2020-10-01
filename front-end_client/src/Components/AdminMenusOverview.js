@@ -8,10 +8,18 @@ import MenuCard from "./MenuCard";
 export default function AdminMenusOverview(props) {
   return (
     <Row>
-      {props.menus.map((menu) => {
+      {props.restaurants.map((restaurant, index) => {
         return (
-          <Col md={4}>
-            <MenuCard menu={menu} />
+          <Col lg={4} md={6} key={index}>
+            <MenuCard
+              menu={restaurant.menu}
+              restaurantName={restaurant.name}
+              setMenuToEdit={() => {
+                props.setMenuToEdit(restaurant.menu);
+                props.setMenuToEditId(restaurant._id);
+              }}
+              key={index}
+            />
           </Col>
         );
       })}

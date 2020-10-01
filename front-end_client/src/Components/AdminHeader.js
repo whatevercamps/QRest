@@ -1,12 +1,15 @@
 import React from "react";
 import { Navbar, NavDropdown, Nav } from "react-bootstrap";
-export default function AdminHeader() {
+import { Link } from "react-router-dom";
+export default function AdminHeader(props) {
   return (
     <Navbar bg='light' expand='lg'>
-      <Navbar.Brand href='#home'>QRest</Navbar.Brand>
+      <Navbar.Brand onClick={props.goHome}>
+        <Link to='/admin'>QRest</Link>
+      </Navbar.Brand>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='basic-navbar-nav'>
-        <Nav className='mr-auto'>
+        {/* <Nav className='mr-auto'>
           <NavDropdown title='Acciones' id='basic-nav-dropdown'>
             <NavDropdown.Item href='#action/3.1'>
               Editar restaurantes
@@ -23,8 +26,8 @@ export default function AdminHeader() {
           <Nav.Link href='#home' disabled>
             Analítica
           </Nav.Link>
-        </Nav>
-        <Nav>
+        </Nav> */}
+        <Nav className='ml-auto'>
           <Nav.Link href='#deets'>Cerrar sesión</Nav.Link>
         </Nav>
       </Navbar.Collapse>

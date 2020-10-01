@@ -1,42 +1,35 @@
 {
-  "menuStructure": {
-    "pages": [
-      {
-        "name": "dia",
-        "sections": [
-          {
-            "name": "entradas",
-            "products": [
-              {
-                "name": "papitas",
-                "ingredients": ["papas, pimienta"],
-                "description": "Papas al horno muy ricas",
-                "price": 4600,
-                "imgUrl": ""
-              }
-            ]
-          },
-          {
-            "name": "platos fuertes",
-            "products": [
-              {
-                "name": "pasta italiana",
-                "ingredients": ["pasta, salsa de tomate"],
-                "description": "Pasta artesanal con sala italiana de la casa",
-                "price": 12500,
-                "imgUrl": ""
-              },
-              {
-                "name": "hamburgesa de la casa",
-                "ingredients": ["carne, tomate, queso, salsa de tomate"],
-                "description": "Hamburgesa",
-                "price": 12500,
-                "imgUrl": ""
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
+  "menuStructure": [
+    {
+      "name": "entradas",
+      "products": [
+        {
+          "name": "papitas",
+          "ingredients": ["papas, pimienta"],
+          "description": "Papas al horno muy ricas",
+          "price": 4600,
+          "imgUrl": ""
+        }
+      ]
+    },
+    {
+      "name": "platos fuertes",
+      "products": [
+        {
+          "name": "pasta italiana",
+          "ingredients": ["pasta, salsa de tomate"],
+          "description": "Pasta artesanal con sala italiana de la casa",
+          "price": 12500,
+          "imgUrl": ""
+        },
+        {
+          "name": "hamburgesa de la casa",
+          "ingredients": ["carne, tomate, queso, salsa de tomate"],
+          "description": "Hamburgesa",
+          "price": 12500,
+          "imgUrl": ""
+        }
+      ]
+    }
+  ]
 }

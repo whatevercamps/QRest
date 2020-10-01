@@ -4,31 +4,31 @@ export default function MenuCard(props) {
   return (
     <Card className='MenuCard'>
       <Card.Header>
-        Menú de <b>{props.menu.RestaurantName}</b>
+        Menú de <b>{props.restaurantName}</b>
       </Card.Header>
       <Card.Body>
-        {props.menu.pages.map((page, index) => {
+        {props.menu.map((section, index) => {
           return (
-            <>
+            <div key={index}>
               <Card.Subtitle className='mb-2 text-muted'>
-                Página {page.name}
+                Sección de {section.name}
               </Card.Subtitle>
               <Card.Text>
                 {" "}
-                {" " + page.sections.length} secciones y{" "}
-                {page.sections.reduce(
-                  (total, section) => total + section.products.length,
-                  0
-                )}{" "}
-                productos
+                {" " + section.products.length}{" "}
+                {section.products.length === 1 ? "producto" : "productos"}
               </Card.Text>
-              {index < props.menu.pages.length - 1 && <hr />}
-            </>
+              {index < props.menu.length - 1 && <hr />}
+            </div>
           );
         })}
       </Card.Body>
       <Card.Footer className='text-muted'>
-        <Button variant='primary' className='editButtonFooter'>
+        <Button
+          variant='primary'
+          className='editButtonFooter'
+          onClick={() => props.setMenuToEdit(props.menu)}
+        >
           Editar
         </Button>
         <small>Editado hace {props.menu.lastEdited || "2 minutos"}</small>

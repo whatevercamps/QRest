@@ -1,6 +1,17 @@
 var express = require("express");
 var router = express.Router();
 
+var uuid = require("uuid");
+
+var aws = require("aws-sdk");
+var s3 = new aws.S3();
+
+s3.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION,
+});
+
 const restaurantModel = require("../model/restaurantModel")();
 
 const adminModel = require("../model/adminModel")();
@@ -139,6 +150,38 @@ router.get("/getRestaurants", (req, res, next) => {
       });
     })
     .catch(next);
+});
+
+router.get("/getSignedUrlS3", (req, res, next) => {
+  const filename = req.query.filename;
+  const filetype = req.query.filetype;
+
+  const key = `${filename}-${uuid.v4()}`;
+
+  console.log("key", key);
+
+  let params = {
+    Bucket: "qarta-images",
+    Key: key,
+    Expires: 100,
+    ContentType: filetype,
+  };
+
+  s3.getSignedUrl("putObject", params, (err, signedUrl) => {
+    if (err) {
+      console.log(err);
+      return next(err);
+    } else {
+      return res.status(200).json({
+        success: true,
+        msg: "Restaurants response",
+        data: {
+          postUrl: signedUrl,
+          getUrl: signedUrl.split("?")[0],
+        },
+      });
+    }
+  });
 });
 
 module.exports = router;
